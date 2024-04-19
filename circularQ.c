@@ -105,7 +105,7 @@ element getElement()
 // 원형 큐가 비어있는지 확인하는 함수
 int isEmpty(QueueType *cQ)
 {
-	if(cQ->front == cQ->rear) // front와 rear가 같을 경우
+	if(cQ->front == (cQ->rear)%MAX_QUEUE_SIZE) // front와 rear가 같을 경우
 	{
 		printf("Queue is empty.\n"); 
 		return 1;
@@ -139,7 +139,8 @@ void enQueue(QueueType *cQ, element item)
 		return; // 가득 차있다면 함수 종료
 	else // 가득 차있지 않다면
 	{	
-		// rear를 다음 인덱스로 이동, 나머지 연산을 이용해 rear가 배열의 끝에 있다면 0으로 이동
+		// rear를 다음 인덱스로 이동, 나머지 연산을 이용해 
+		// rear가 배열의 끝에 있다면 0으로 이동
 		cQ->rear = (cQ->rear + 1) % MAX_QUEUE_SIZE;
 		cQ->queue[cQ->rear] = item; // rear가 가리키는 위치에 item 저장
 	}
@@ -153,7 +154,8 @@ void deQueue(QueueType *cQ, element *item)
 		return; // 비어있다면 함수 종료
 	else // 비어있지 않다면
 	{
-		// front를 다음 인덱스로 이동, 나머지 연산을 이용해 front가 배열의 끝에 있다면 0으로 이동
+		// front를 다음 인덱스로 이동, 나머지 연산을 이용해 
+		// front가 배열의 끝에 있다면 0으로 이동
 		cQ->front = (cQ->front + 1) % MAX_QUEUE_SIZE;
 		*item = cQ->queue[cQ->front]; // front가 가리키는 위치의 요소를 item에 저장
 	}
